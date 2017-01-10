@@ -1,6 +1,6 @@
 # Dab Dab Revolution
 
-#### *"Pretty F&ast;&ast;&ast;ing Awesome" - Téigan*
+## *"Pretty F&ast;&ast;&ast;ing Awesome" - Téigan*
 
 ---
 
