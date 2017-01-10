@@ -1,15 +1,29 @@
 from microbit import *
-import math
-    
-def getPitch():
-    x = accelerometer.get_x() / 1024
-    y = accelerometer.get_y() / 1024
-    z = accelerometer.get_z() / 1024
-    
-    return math.degrees(math.atan(y/((math.sqrt(x**2 + z**2) if math.sqrt(x**2 + z**2) != 0 else 0.1))))
-    
+import radio
+
+radio.on()
+radio.config(channel = 26, address = 0x27182818)
+
+msg = ["0 0", "0 0"]
+
 def getValidDab(position):
-    if position[0] == "b":
-        return getPitch() > 20
+    bend = [m[0] == 1 for m in msg]
+    pitch = [m[2:] for m in msg]
+    
+    if position[1] == "l":
+        if bend[0] or not bend[1]:
+            return False
     else:
-        return getPitch() < -20
+        if not bend[0] or bend[1]:
+            return False
+    
+    if position[0] == "b":
+        return pitch[0] > 20 and pitch[1] > 20
+    else:
+        return pitch[0] < -20 and pitch[1] < -20
+
+while True:
+    newMsg = radio.receive()
+    if newMsg:
+        newMsg = newMsg.split(" ")
+        msg[0 if newMsg[0] == "L" else 1] = " ".join(newMsg[1:3])
