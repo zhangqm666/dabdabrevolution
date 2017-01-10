@@ -1,5 +1,5 @@
 # Dab Dab Revolution
 ---
-*"Pretty F\*\*\*ing Awesome" - Téigan*
+*"Pretty F&ast;&ast;&ast;ing Awesome" - Téigan*
 ---
 Made for NCSS Embedded Stream 2017
