@@ -39,10 +39,18 @@ class run:
 		self.display = display()
 
 	def play(self):
-		while True:
+		moves = 0
+		while True and moves <= 30:
 			self.master.next()
-			self.master.checkDab()
+			if self.master.checkDab():
+				self.display.showw(Image.YES)
+			else:
+				self.display.showw(Image.NO)
 			sleep(500)
+			self.display.showw('clear')
+			moves += 1
+		else:
+			display.scroll('end')
 
 class display:
 	def __init__(self, displayType='microbit'):
@@ -54,6 +62,12 @@ class display:
 	def getCurrentPos(self):
 		master = master()
 		return master.currentMove
+
+	def showw(self, img='clear'):
+		if img != 'clear':
+			display.show(img)
+		else:
+			display.clear()
 
 	# get current position (generated) and displays on the 5x5 display
 	def microbitDisplay(self):
@@ -74,5 +88,6 @@ class display:
 			else:
 				display.show(imageToDisplay)
 
-
+run = run()
+run.play()
 
