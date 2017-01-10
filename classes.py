@@ -10,10 +10,15 @@ class dabtector:
 # holds the default positions after calibration
 class positions:
 	def __init__(self):
+		self.positions = ['tl', 'tr', 'bl', 'br']
+		self.axis = ['x', 'y', 'z']
 		# dictionary to store accelerometer values
 		self.accel = {'tr':{'x': 0, 'y': 0, 'z': 0}, 'tl':{'x': 0, 'y': 0, 'z': 0}, 'br':{'x': 0, 'y': 0, 'z': 0}, 'bl':{'x': 0, 'y': 0, 'z': 0}}
 		# dictionary to store compass values
 		self.compass = {'tr':{'x': 0, 'y': 0, 'z': 0}, 'tl':{'x': 0, 'y': 0, 'z': 0}, 'br':{'x': 0, 'y': 0, 'z': 0}, 'bl':{'x': 0, 'y': 0, 'z': 0}}
+
+		self.accelRange = {}
+		self.compassRange = {}
 
 	# allows the defaults to be pushed to the dictionaries for calling later
 	# position: ['tl', 'tr', 'bl', 'br']
@@ -33,6 +38,34 @@ class positions:
 				self.compass[position][axis] = values[axisCounter]
 				axisCounter += 1
 
+	def dictcw(self, move):
+		if move == 'tr':
+			return 'br'
+		elif move == 'br':
+			return 'bl'
+		elif move == 'bl':
+			return 'tl'
+		elif move == 'tl':
+			return 'tr'
+
+	def dictccw(self, move):
+		if move == 'tr':
+			return 'tl'
+		elif move == 'tl':
+			return 'bl'
+		elif move == 'bl':
+			return 'br'
+		elif move == 'br':
+			return 'tr'
+
+	def movementRanges(self):
+		for move in self.positions:
+			self.accelRange[move] = {}
+			for axis in self.axis:
+				dabrangelow = (self.accel[self.dictccw(move)][axis] + self.accel[move][axis]) // 2
+				dabrangehigh = (self.accel[self.dictcw(move)][axis] + self.accel[move][axis]) // 2
+				self.accelRange[move][axis] = [dabrangelow, dabrangehigh]
+
 class moves:
 	def __init__(self):
 		self.positions = ['tl', 'tr', 'bl', 'br']
@@ -44,13 +77,16 @@ class moves:
 		self.currentMove = random.choice(self.positions)
 		return self.currentMove
 
-	def check(self, defaults):
-		THRESHOLD = 0
+	def check(self, current):
+		pos = positions()
 		for pos in self.positions:
 			for axis in self.axis:
-				currentDefault = defaults[pos][axis]
-				if currentDefault - THRESHOLD <= self.currentPOS <= currentDefault + THRESHOLD:
-
+				dabRange = pos.accelRange[pos][axis]
+				dabRange = range(dabRange[0], dabRange[1])
+				if current in dabRange:
+					return True
+				else:
+					return False
 
 # calls the dabtector class for use under the variable 'dabtector'
 dabtector = dabtector()
@@ -62,5 +98,8 @@ pos = positions()
 pos.calibrate('tr', [10, 20, 30, 40, 50, 60])
 
 # prints the x value of the accelerometer at top right (tr)
-print(pos.accel['tr']['x'])
+# print(pos.accel['tr']['x'])
 
+pos.movementRanges()
+
+print(pos.accelRange)
