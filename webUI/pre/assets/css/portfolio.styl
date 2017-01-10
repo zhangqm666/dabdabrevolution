@@ -1,0 +1,84 @@
+@import 'main'
+
+$main-col = #f33
+
+.hero > .hero-wrapper > .hero-content
+	text-align center
+
+header.section-header
+	& h2
+		margin-left -4px
+
+section
+	&:nth-of-type(even)
+		background-color #fff
+	&:nth-of-type(odd)
+		background-color #f7f7f7
+
+section.portfolio-about
+	padding 5em inherit
+	& header.section-header
+		padding-bottom 1em
+		text-align left
+		line-height 1
+	& ul
+		list-style none
+		padding 0
+		& li
+			font-size 1.6em
+			text-transform lowercase
+			&:before
+				content '-'
+				display inline-block
+				margin-right .2em
+
+section.portfolio-case-study
+	padding 5em inherit
+	& header.section-header
+		padding-bottom 1em
+		text-align left
+		line-height 1
+
+section.portfolio-images
+	& .portfolio-img
+		width 50%
+		margin 0 auto
+		padding 2em 0
+		&:first-child
+			padding-top 0
+		&:last-child
+			padding-bottom 0
+		& img
+			max-width 1276px
+			width 100%
+
+.project-nav
+	background-color #fff
+	color #000
+	left 0
+	right 0
+	height 100px
+	bottom 0
+	padding 65px 20% 65px 20%
+	@media md
+		padding 65px 35% 65px 35%
+	display table
+	width 100%
+	font-size .85em
+	font-family 'Roboto Mono'
+	& .third
+		padding 7.5px 0
+		display block
+		width 20%
+		@media md
+			width 10%
+		vertical-align middle
+		display table-cell
+		&.left
+			text-align left
+		&.mid
+			text-align center
+		&.right
+			text-align right
+		& span
+			width 100%
