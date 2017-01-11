@@ -15,4 +15,4 @@ With an indirect sponsorship from **WiseTech Global**, this product is guarantee
 
 This project would like to thank all contributors, and members of the DabTech Global team, and our partner companies, Tommonwealth Dank, and Danklassian.
 
-No, but seriously, we would actually like to genuinely thank, Greg Darkes (Elmo), Almost Dr. Giovanni lastname/Durso, Jimmo, Owen, Deanna, Katie, Joanne, and least/most of all, Téigan - memelord.
+No, but seriously, we would actually like to genuinely thank, Greg Darkes (Elmo), Almost Dr. Giovanni lastname/Durso (snack-master), Jimmo, Owen, Deanna, Katie, Joanne, and least/most of all, Téigan - memelord.
