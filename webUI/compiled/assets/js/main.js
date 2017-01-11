@@ -25,9 +25,10 @@ $cross = $('#cross');
 // });
 
 (function getJSON() {
-	$.get( "http://localhost/get_next_line", {crossDomain: true}, function(data) {
+	$.get( "/get_next_line", function(data) {
 		console.log(data);
-	    if (data[0] == 'tr') {
+		data = data['data'];
+	    if (data == 'tr') {
 			tr();
 		} else if (data == 'tl') {
 			tl();
@@ -43,7 +44,7 @@ $cross = $('#cross');
 			tick();
 		}
 	});
-    setTimeout(getJSON, 100);
+    setTimeout(getJSON, 120);
 })();
 
 // while (whileT) {
