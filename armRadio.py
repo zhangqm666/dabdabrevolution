@@ -3,12 +3,13 @@ import math
 import radio
 
 side = "L"
+calib_read = 0
 
 radio.on()
 radio.config(channel = 26, address = 0x27182818)
 
 def isBent(calib_read):
-    return abs(calib_read - pin0.read_analog()) > 60
+    return calib_read > pin2.read_analog()
 
 def getPitch():
     x = accelerometer.get_x() / 1024
@@ -17,11 +18,14 @@ def getPitch():
     
     return math.degrees(math.atan(y/((math.sqrt(x**2 + z**2) if math.sqrt(x**2 + z**2) != 0 else 0.1))))
 
-def switchSide():
-    side = "R" if side == "L" else "L"
+def switchSide(side):
+    return "R" if side == "L" else "L"
 
 while True:
     if button_a.was_pressed():
-        switchSide()
+        side = switchSide(side)
+    if button_b.was_pressed():
+        calib_read = pin2.read_analog()
     display.show(side)
-    radio.send(side, ("1" if isBent() else "0"), str(getPitch()))
+    radio.send(str(side + " " + ("1" if isBent(calib_read) else "0") + " " + str(getPitch())))
+    sleep(100)
