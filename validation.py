@@ -6,7 +6,6 @@ radio.config(channel = 26, address = 0x27182818)
 
 msg = ["0 0", "0 0"]
 
-<<<<<<< HEAD
 def getValidDab(position, msg):
     bend = [m[0] == "1" for m in msg]
     pitch = [float(m[2:]) for m in msg]
@@ -14,12 +13,10 @@ def getValidDab(position, msg):
     print(bend)
     print(pitch)
     
-=======
 def getValidDab(position):
     bend = [m[0] == 1 for m in msg]
     pitch = [m[2:] for m in msg]
 
->>>>>>> origin/master
     if position[1] == "l":
         if bend[0] or not bend[1]:
             return False
