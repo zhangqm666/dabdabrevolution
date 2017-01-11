@@ -1,6 +1,4 @@
 # master microbit
-
-# imports
 from microbit import *
 import radio
 import random
@@ -51,6 +49,7 @@ class run:
 			moves += 1
 		else:
 			display.scroll('end')
+			return False
 
 class display:
 	def __init__(self, displayType='microbit'):
@@ -89,5 +88,8 @@ class display:
 				display.show(imageToDisplay)
 
 run = run()
-run.play()
+while True:
+	if button_a.was_pressed():
+		if run.play() == False:
+			break
 
