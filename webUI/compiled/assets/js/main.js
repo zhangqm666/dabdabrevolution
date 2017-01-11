@@ -6,10 +6,6 @@ $br = $('#br');
 $tick = $('#tick');
 $cross = $('#cross');
 
-// $br.removeClass('visible');
-
-
-
 $(document).keyup(function(e) {
 	if (e.keyCode == 37) { // 37 == left arrow
 		tl();
@@ -27,8 +23,6 @@ $(document).keyup(function(e) {
 		rmvall();
 	}
 });
-
-
 
 // $('#btn-tl').on('click', function() {
 // 	tl();
@@ -96,6 +90,3 @@ function rmvall() {
 	$tick.removeClass('visible');
 	$cross.removeClass('visible');
 }
-
-
-// .delay(1000)
