@@ -19,8 +19,30 @@ xl = "screen and (min-width: 1200px)"
 
 body
 	width 100%
-	height 100%
-	max-height 100vh
+	height 100vh
+	min-height 600px
+	font-family 'Circular'
+	font-weight 200
+
+header
+	& h2.title
+		text-align center
+		padding 1em 0 0 0
+		font-size 3em
+		font-weight 200
+	& h4.company
+		text-align center
+		padding .4em 0 .4em 0
+		font-size 1.2em
+		font-weight 200
+
+.test-buttons
+	text-align center
+	& span
+		margin 0 1em
+
+span#btn-cl
+	transform translateY(60vh)
 
 .arrows-container
 	& #tl
@@ -44,7 +66,7 @@ body
 		&.visible
 			visibility visible
 			opacity 1
-			transition .6s all ease
+			transition .6s opacity ease
 			height auto
 
 	& #bl
@@ -56,7 +78,7 @@ body
 		&.visible
 			visibility visible
 			opacity 1
-			transition .6s all ease
+			transition .6s opacity ease
 			height auto
 
 	& #br
@@ -68,8 +90,36 @@ body
 		&.visible
 			visibility visible
 			opacity 1
-			transition .6s all ease
+			transition .6s opacity ease
 			height auto
+
+	& #tick
+		Z-index: -995
+		visibility hidden
+		opacity 0
+		transition .6s opacity ease
+		height 0
+		&.visible
+			visibility visible
+			opacity 1
+			transition .6s opacity ease
+			height auto
+		& svg
+			transform scale(1.8)
+
+	& #cross
+		Z-index: -994
+		visibility hidden
+		opacity 0
+		transition .6s opacity ease
+		height 0
+		&.visible
+			visibility visible
+			opacity 1
+			transition .6s opacity ease
+			height auto
+		& svg
+			transform scale(2)
 
 
 .arrow

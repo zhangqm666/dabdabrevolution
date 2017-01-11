@@ -22,6 +22,22 @@ html(lang='en')
 		//- link(rel='shortcut icon', href='assets/images/favicon.png')
 
 	body
+		header
+			h2.title Dab Dab Revolution
+			h4.company a Dab-Tech Global product <br> in association with the Tommonwealth Dank
+
+		//- .test-buttons
+		//- 	span#btn-tl.btn.btn-outline-primary top left
+		//- 	span#btn-tr.btn.btn-outline-primary top right
+		//- 	span#btn-bl.btn.btn-outline-primary bottom left
+		//- 	span#btn-br.btn.btn-outline-primary bottom right
+		//- 	br
+		//- 	br
+		//- 	span#btn-tick.btn.btn-outline-success tick
+		//- 	span#btn-cross.btn.btn-outline-danger cross
+		//- 	br
+		//- 	br
+		//- 	span#btn-cl.btn.btn-outline-warning clear
 
 		.arrows-container
 			#tl.arrow
@@ -251,6 +267,20 @@ html(lang='en')
 					g#arw-rd-top
 					g#left-move-2
 
+			#tick.arrow
+				svg#Layer_1(version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', x='0px', y='0px', viewbox='0 0 64 64', enable-background='new 0 0 64 64', xml:space='preserve')
+					g
+						polyline(fill='none', stroke='#000000', stroke-width='2', stroke-linecap='round', stroke-linejoin='round', stroke-miterlimit='10', points='13,33 25,45 \
+						49,21 	')
+					//- rect(x='1', y='1', fill='none', stroke='#000000', stroke-width='2', stroke-miterlimit='10', width='62', height='62')
+
+			#cross.arrow
+				svg#Layer_1(version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', x='0px', y='0px', viewbox='0 0 64 64', enable-background='new 0 0 64 64', xml:space='preserve')
+					g
+						line(fill='none', stroke='#000000', stroke-width='2', stroke-linecap='round', stroke-miterlimit='10', x1='18.947', y1='17.153', x2='45.045', y2='43.056')
+					g
+						line(fill='none', stroke='#000000', stroke-width='2', stroke-linecap='round', stroke-miterlimit='10', x1='19.045', y1='43.153', x2='44.947', y2='17.056')
+					//- rect(x='1', y='1', fill='none', stroke='#000000', stroke-width='2', stroke-miterlimit='10', width='62', height='62')
 
 		//- scripts
 		//- script(src='assets/js/pace.min.js')
