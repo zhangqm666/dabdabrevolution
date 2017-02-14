@@ -4,6 +4,12 @@
 
 #### Made for NCSS 2017 (Embedded)
 
+![superdab](https://raw.githubusercontent.com/harryparkdotio/dabdabrevolution/master/magicalness/superdab.gif)
+
+![dabbingintensifies](https://raw.githubusercontent.com/harryparkdotio/dabdabrevolution/master/magicalness/dabbingintensifies.gif)
+
+![owendab](https://raw.githubusercontent.com/harryparkdotio/dabdabrevolution/master/magicalness/owendab.gif)
+
 
 This project uses multiple BBC micro:bits
 
