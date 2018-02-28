@@ -24,41 +24,43 @@
 // 	});
 // };
 
-const addAndRemove = (selector) => {
+const remove = () => {
+	document.querySelectorAll('.arrow').forEach((e) => { e.classList.remove('visible'); });
+};
+
+const makeVisible = (selector) => {
+	remove();
 	document.getElementById(selector).classList.add('visible');
-	document.querySelectorAll(`.arrow:not(#${selector})`).map((e) => {
-		e.classList.remove('visible');
-	});
 };
 
 const getMove = () => {
 	$.get('/result', (data) => {
 		switch(data) {
 			case 'tr':
-				addAndRemove('tr');
+				makeVisible('tr');
 				break;
 			case 'tl':
-				addAndRemove('tl')
+				makeVisible('tl')
 				break;
 			case 'br':
-				addAndRemove('br')
+				makeVisible('br')
 				break;
 			case 'bl':
-				addAndRemove('bl')
+				makeVisible('bl')
 				break;
 			case 'tick':
-				addAndRemove('tick')
+				makeVisible('tick')
 				break;
 			case 'cross':
-				addAndRemove('cross')
+				makeVisible('cross')
 				break;
 			case 'clear':
-				document.querySelectorAll('.arrow').map((e) => { e.classList.remove('visible'); });
+				remove();
 				break;
 		}
 	});
 };
 
 (() => {
-	setInterval(getMove, 100);
+	setInterval(getMove, 200);
 })();
