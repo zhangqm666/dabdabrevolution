@@ -4,16 +4,14 @@
 import math
 import os
 import sys
-# import serial
+import serial
 import threading
 
 from time import sleep
 
-# run(host='0.0.0.0', port=8080, server='gevent')
-
 from bottle import route, run, static_file
 
-# SERIAL_PORT = '/dev/tty.usbmodem1412'
+SERIAL_PORT = 'COM25'
 
 
 # NOTE: This really should have a lock protecting it, but I am abusing the fact
@@ -22,7 +20,7 @@ new_data = []
 def wait_on_serial():
   p = serial.Serial(SERIAL_PORT, 115200, timeout=3)
   while True:
-    new_data.append(p.readline().rstrip('\n\r'))
+    new_data.append(p.readline().rstrip(b'\n\r'))
 
 
 @route('/static/<filepath:path>')
@@ -34,16 +32,15 @@ a = [0]
 
 @route('/result')
 def result():
-	a[0] += 1
-	if a[0] == 7:
-		a[0] = 0
-	sleep(0.5)
-	return ['tr', 'tl', 'br', 'bl', 'tick', 'cross', 'clear'][a[0]]
-
+    if len(new_data) > 0:
+        return new_data[-1]
 
 # Spin the serial code off into its own thread.
 t = threading.Thread(target=wait_on_serial)
 t.daemon = True
 t.start()
 
-run(host='localhost', port=8080)
+try:
+    run(host='localhost', port=8080)
+except KeyboardInterrupt:
+	t.stop()

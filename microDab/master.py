@@ -16,11 +16,13 @@ position_to_image = {
     'br': Image.ARROW_SE
 }
 
+lastWasCorrect = False
+score = 0
 positions = [key for key in position_to_image.keys()]
 currentPosition = positions[0]
 lastTime = running_time()
 
-timeDif = 2000
+timeDif = 3000
 
 def getRandomPosition():
     return random.choice(positions)
@@ -71,17 +73,31 @@ while True:
 
     display.show(position_to_image[currentPosition])
     
+    if button_a.was_pressed():
+        score = 0
+        lastWasCorrect = False
+        print('clear')
+        sleep(4000)
+    
     if newMsg and isinstance(newMsg, str):
         updateCurrentCombinedPosition(newMsg)
 
     if running_time() - lastTime > timeDif:
         print('currentCombinedPosition: ', currentCombinedPosition)
         if getValidDab(currentPosition, currentCombinedPosition):
-            print("tick")
-            timeDif = max(500, timeDif - 50)
+            lastWasCorrect = True
+            result = "tick"
+            display.show(Image.YES)
+            timeDif = max(800, timeDif - 150)
+            score += int(200000 / timeDif)
         else:
-            print("cross")
-        lastTime = running_time()
+            result = "cross"
+            lastWasCorrect = False
+            display.show(Image.NO)
+            
+        print("{} ${}".format(result, score))
+        sleep(2000)
         
+        lastTime = running_time()
         currentPosition = getNextDab(currentPosition)
         print(currentPosition)

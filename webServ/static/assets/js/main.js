@@ -33,8 +33,24 @@ const makeVisible = (selector) => {
 	document.getElementById(selector).classList.add('visible');
 };
 
+let highScore = 0;
+
+const updateScore = (score) => {
+    document.getElementById('score').innerHTML = score;
+    if(score > highScore) {
+        highScore = score
+        document.getElementById('highScore').innerHTML = highScore;
+    }
+};
+
 const getMove = () => {
-	$.get('/result', (data) => {
+	$.ajax({url: '/result', timeout: 80, success: (data) => {
+        if(data.length > 2 && data !== 'clear') {
+            data = data.split(' ');
+            let score = data.length > 1 ? data[1].slice('1') : 0;
+            updateScore(score);
+            data = data[0];
+        }
 		switch(data) {
 			case 'tr':
 				makeVisible('tr');
@@ -58,9 +74,9 @@ const getMove = () => {
 				remove();
 				break;
 		}
-	});
+	}});
 };
 
 (() => {
-	setInterval(getMove, 200);
+	setInterval(getMove, 100);
 })();
