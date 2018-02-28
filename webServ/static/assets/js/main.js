@@ -24,8 +24,17 @@
 // 	});
 // };
 
-const remove = () => {
-	document.querySelectorAll('.arrow').forEach((e) => { e.classList.remove('visible'); });
+if(!window.localStorage.highscore) { window.localStorage.highscore = 0 }
+window.localStorage.highscore = typeof window.localStorage.highscore === 'number' ? window.localStorage.highscore : 0;
+document.getElementById('highscore').innerHTML = window.localStorage.highscore;
+
+const updateScore = (score) => {
+	document.getElementById('score').innerHTML = score;
+    score = parseInt(score);
+	if (score > window.localStorage.highscore) {
+		window.localStorage.highscore = score;
+		document.getElementById('highscore').innerHTML = window.localStorage.highscore;
+	}
 };
 
 const makeVisible = (selector) => {
@@ -33,48 +42,46 @@ const makeVisible = (selector) => {
 	document.getElementById(selector).classList.add('visible');
 };
 
-let highScore = 0;
-
-const updateScore = (score) => {
-    document.getElementById('score').innerHTML = score;
-    if(score > highScore) {
-        highScore = score
-        document.getElementById('highScore').innerHTML = highScore;
-    }
+const remove = () => {
+	document.querySelectorAll('.arrow').forEach((e) => { e.classList.remove('visible'); });
 };
 
 const getMove = () => {
-	$.ajax({url: '/result', timeout: 80, success: (data) => {
-        if(data.length > 2 && data !== 'clear') {
-            data = data.split(' ');
-            let score = data.length > 1 ? data[1].slice('1') : 0;
-            updateScore(score);
-            data = data[0];
-        }
-		switch(data) {
-			case 'tr':
-				makeVisible('tr');
-				break;
-			case 'tl':
-				makeVisible('tl')
-				break;
-			case 'br':
-				makeVisible('br')
-				break;
-			case 'bl':
-				makeVisible('bl')
-				break;
-			case 'tick':
-				makeVisible('tick')
-				break;
-			case 'cross':
-				makeVisible('cross')
-				break;
-			case 'clear':
-				remove();
-				break;
+	$.ajax({
+		url: '/result',
+		timeout: 95,
+		success: (data) => {
+			if (data.length > 2 && data !== 'clear') {
+				data = data.split(' ');
+				let score = data.length > 1 ? data[1].slice(1) : 0;
+				updateScore(score);
+				data = data[0];
+			}
+			switch(data) {
+				case 'tr':
+					makeVisible('tr');
+					break;
+				case 'tl':
+					makeVisible('tl')
+					break;
+				case 'br':
+					makeVisible('br')
+					break;
+				case 'bl':
+					makeVisible('bl')
+					break;
+				case 'tick':
+					makeVisible('tick')
+					break;
+				case 'cross':
+					makeVisible('cross')
+					break;
+				case 'clear':
+					remove();
+					break;
+			}
 		}
-	}});
+    });
 };
 
 (() => {
