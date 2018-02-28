@@ -24,14 +24,16 @@
 // 	});
 // };
 
+if(!window.localStorage.highscore) { window.localStorage.highscore = 0 }
 window.localStorage.highscore = typeof window.localStorage.highscore === 'number' ? window.localStorage.highscore : 0;
-document.getElementById('highscore').innerHTML = window.session.highscore;
+document.getElementById('highscore').innerHTML = window.localStorage.highscore;
 
 const updateScore = (score) => {
 	document.getElementById('score').innerHTML = score;
+    score = parseInt(score);
 	if (score > window.localStorage.highscore) {
 		window.localStorage.highscore = score;
-		document.getElementById('highscore').innerHTML = window.session.highscore;
+		document.getElementById('highscore').innerHTML = window.localStorage.highscore;
 	}
 };
 
@@ -79,7 +81,7 @@ const getMove = () => {
 					break;
 			}
 		}
-	});
+    });
 };
 
 (() => {
